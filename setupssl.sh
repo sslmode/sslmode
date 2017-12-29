@@ -214,7 +214,7 @@ echo "Squid3 : 8080"  | tee -a log-install.txt
 echo "OpenSSH : 22"  | tee -a log-install.txt
 echo "Dropbear : 109'110'442"  | tee -a log-install.txt
 echo "SSL : 443"  | tee -a log-install.txt
-echo "OpenVPN  : TCP 1194 (sila dapatkan ovpn dari OrangKuatSabahanTerkini)"  | tee -a log-install.txt
+echo "OpenVPN  : IP/client.ovpn"  | tee -a log-install.txt
 echo "Fail2Ban : [on]"  | tee -a log-install.txt
 echo "Timezone : Asia/Kuala_Lumpur"  | tee -a log-install.txt
 echo "Menu : type menu to check menu script"  | tee -a log-install.txt
