@@ -123,10 +123,10 @@ echo "" | lolcat
 echo "" | lolcat
 echo "      --[         SELAMAT DATANG  DI BlackHand7752             ]--"| boxes -d boy | lolcat
 echo "         ====================================================="| lolcat
-echo "         #           WhatsApp     : -                       #"| lolcat
-echo "         #           Telegram     : @FORD7752               #"| lolcat
-echo "         #           GROUP        : T.me/FORD7752           #"| lolcat
-echo "         #           Channel      : T.me/FORD7752           #"| lolcat
+echo "         #           WhatsApp     : 0109475453              #"| lolcat
+echo "         #           Telegram     : @OrangKuatSabahanTerkini#"| lolcat
+echo "         #           GROUP        : -                       #"| lolcat
+echo "         #           Channel      : @NewPremiumService      #"| lolcat
 echo "         #--------------------------------------------------#"| lolcat
 echo "         #      Sila taip [menu] and ENTER untuk options    #"| lolcat
 echo "         #--------------------------------------------------#"| lolcat
