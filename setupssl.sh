@@ -31,10 +31,11 @@ cd
 wget -q -O IP $source/master/IP.txt
 if ! grep -w -q $MYIP IP; then
 	echo "Maaf, hanya IP yang terdaftar yang bisa menggunakan script ini!"
+        echo "RM80 Oder Sekarang!"
 	if [[ $vps = "zvur" ]]; then
-		echo "Hubungi: OrangKuatSabahanTerkini 0109475453)"
+		echo "Hubungi Telegram : @OrangKuatSabahanTerkini Atau whatsapp +60109475453)"
 	else
-		echo "Hubungi: OrangKuatSabahanTerkini 0109475453)"
+		echo "Hubungi Telegram : @OrangKuatSabahanTerkini Atau whatsapp +60109475453)"
 	fi
 	rm -f /root/IP
 	exit
