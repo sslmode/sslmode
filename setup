@@ -34,7 +34,24 @@ fi
 
 # go to root
 cd
-
+#Install Figlet
+apt-get install figlet
+echo "clear" >> .bashrc
+echo 'echo -e ""' >> .bashr
+echo 'echo -e ""' >> .bashrc
+echo 'figlet -k "           R.I.H  VPN"' >> .bashrc
+echo 'echo -e ""' >> .bashrc
+echo 'echo -e "       ========================================================="' >> .bashrc
+echo 'echo -e "       *             Script By Brojey | Tester Hacker          *"' >> .bashrc
+echo 'echo -e "       ========================================================="' >> .bashrc
+echo 'echo -e "       *                      Contact Me                       *"' >> .bashrc
+echo 'echo -e "       *                        Brojey                         *"' >> .bashrc
+echo 'echo -e "       *                Whatsapp: +60195543220                 *"' >> .bashrc
+echo 'echo -e "       *                Telegram: @Abeyzir                     *"' >> .bashrc
+echo 'echo -e "       ========================================================="' >> .bashrc
+echo 'echo -e "       *       Taip \033[1;31mmenu\033[0m untuk menampilkan senarai menu        *"' >> .bashrc
+echo 'echo -e "       ========================================================="' >> .bashrc
+echo 'echo -e ""' >> .bashrc
 # check registered ip
 wget -q -O IP $source/IP.txt
 if ! grep -w -q $MYIP IP; then
