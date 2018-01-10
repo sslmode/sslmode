@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ******************************************
-# START SCRIPT (amput.tk)
+# START SCRIPT 
 myip=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0' | head -n1`;
 myint=`ifconfig | grep -B1 "inet addr:$myip" | head -n1 | awk '{print $1}'`;
 if [ $USER != 'root' ]; then
@@ -17,13 +17,13 @@ echo "TUN is not available"
 exit 3
 fi
 echo "
-AUTOSCRIPT BY amput.tk
+AUTOSCRIPT BY rosmah mansor
 
 PLEASE CANCEL ALL PACKAGE POPUP
 
 AMBIL PERHATIAN !!!"
 clear
-echo "MULA MEMASANG AUTOSCRIPT"
+echo "start"
 clear
 echo "SET TIMEZONE KUALA LUMPUT GMT +8"
 ln -fs /usr/share/zoneinfo/Asia/Kuala_Lumpur /etc/localtime;
@@ -159,25 +159,6 @@ sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
 /etc/init.d/stunnel4 restart
 cd
 
-#Setting USW
-apt-get install ufw
-ufw allow ssh
-ufw allow 1194/tcp
-sed -i 's|DEFAULT_INPUT_POLICY="DROP"|DEFAULT_INPUT_POLICY="ACCEPT"|' /etc/default/ufw
-sed -i 's|DEFAULT_FORWARD_POLICY="DROP"|DEFAULT_FORWARD_POLICY="ACCEPT"|' /etc/default/ufw
-cat > /etc/ufw/before.rules <<-END
-# START OPENVPN RULES
-# NAT table rules
-*nat
-:POSTROUTING ACCEPT [0:0]
-# Allow traffic from OpenVPN client to eth0
--A POSTROUTING -s 10.8.0.0/8 -o eth0 -j MASQUERADE
-COMMIT
-# END OPENVPN RULES
-END
-ufw enable
-ufw status
-ufw disable
 # mtrt
 wget https://raw.githubusercontent.com/sslmode/sslmode/master/vnstat_php_frontend-1.5.1.tar.gz
 tar xf vnstat_php_frontend-1.5.1.tar.gz
