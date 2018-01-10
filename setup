@@ -34,24 +34,24 @@ fi
 
 # go to root
 cd
-echo "=============================="
-echo "        Selamat Datang        "
-echo "=============================="
-echo "Ketik 'I' Untuk VPS Non-Lokal"
-echo "Ketik 'L' Untuk VPS Lokal"
+echo "========================================"
+echo -e "\e[38;5;82mSelamat \e[38;5;198mDatang"
+echo "========================================"
+echo -e "\e[38;5;198mAutoscript Debian7/8/9"
+echo ""
 # check registered ip
 wget -q -O IP $source/IP.txt
 if ! grep -w -q $MYIP IP; then
 	echo "Maaf, hanya IP yang terdaftar yang bisa menggunakan script ini!"
 	if [[ $vps = "zvur" ]]; then
-		echo "Hubungi: Telegram https://@cucu_atok)"
+		echo -e "\e[38;5;116m Hubungi: Telegram https://@cucu_atok)"
 	else
-		echo "Hubungi: Telegram https://@cucu_atok)"
+		echo -e "\e[38;5;116m Hubungi: Telegram https://@cucu_atok)"
 	fi
 	rm -f /root/IP
 	
 exit 2
-fi
+fi 
 if [[ ! -e /dev/net/tun ]]; then
 echo "TUN is not available"
 exit 3
