@@ -35,10 +35,10 @@ fi
 # go to root
 cd
 echo "========================================"
-echo -e "\e[38;5;82mSelamat \e[38;5;198mDatang"
+echo -e "\e[38;5;226mSelamat Datang"
 echo "========================================"
 echo -e "\e[38;5;198mAutoscript Debian7/8/9"
-echo ""
+echo -e "\e[38;5;13mHubungi Telegram @cucu_atok untuk dapatkan harga promosi"
 # check registered ip
 wget -q -O IP $source/IP.txt
 if ! grep -w -q $MYIP IP; then
