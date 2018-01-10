@@ -39,12 +39,9 @@ echo -e "\e[38;5;198mHubungi Telegram @cucu_atok untuk dapatkan harga promosi"
 echo -e "\e[38;5;226m                               SELAMAT DATANG            "
 echo -e "\e[38;5;226m             ♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧"
 echo -e "\e[38;5;226m             ♣           WhatsApp     :                         ♣"
-echo -e "\e[38;5;225m             ♣           Telegram     : @cucu_atok              ♣"
+echo -e "\e[38;5;226m             ♣           Telegram     : @cucu_atok              ♣"
 echo -e "\e[38;5;226m             ♣           GROUP        : -                       ♣"
 echo -e "\e[38;5;226m             ♣           Channel      : @NewPremiumService      ♣"
-echo -e "\e[38;5;266m             ♣--------------------------------------------------♣"
-echo -e "\e[38;5;226m             ♣      Sila taip [menu] and ENTER untuk options    ♣"
-echo -e "\e[38;5;226m             ♣--------------------------------------------------♣"
 echo -e "\e[38;5;226m             ♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧"
 # check registered ip
 wget -q -O IP $source/IP.txt
