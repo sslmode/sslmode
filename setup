@@ -45,7 +45,7 @@ echo -e "\e[38;5;226m             ♣           Channel      : @NewPremiumServic
 echo -e "\e[38;5;266m             ♣--------------------------------------------------♣"
 echo -e "\e[38;5;226m             ♣      Sila taip [menu] and ENTER untuk options    ♣"
 echo -e "\e[38;5;226m             ♣--------------------------------------------------♣"
-echo -e "\e[38;5;226m             ♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧
+echo -e "\e[38;5;226m             ♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧"
 # check registered ip
 wget -q -O IP $source/IP.txt
 if ! grep -w -q $MYIP IP; then
