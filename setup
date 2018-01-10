@@ -44,9 +44,9 @@ wget -q -O IP $source/IP.txt
 if ! grep -w -q $MYIP IP; then
 	echo "Maaf, hanya IP yang terdaftar yang bisa menggunakan script ini!"
 	if [[ $vps = "zvur" ]]; then
-		echo -e "\e[38;5;116m Hubungi: Telegram https://@cucu_atok)"
+		echo -e "\e[38;5;82m Hubungi: Telegram https://@cucu_atok)"
 	else
-		echo -e "\e[38;5;116m Hubungi: Telegram https://@cucu_atok)"
+		echo -e "\e[38;5;82m Hubungi: Telegram https://@cucu_atok)"
 	fi
 	rm -f /root/IP
 	
