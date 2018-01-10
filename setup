@@ -36,20 +36,20 @@ fi
 cd
 echo -e "\e[38;5;198mAutoscript Debian7/8/9 with Premium Menu"
 echo -e "\e[38;5;198mHubungi Telegram @cucu_atok untuk dapatkan harga promosi"
-echo -e "\e[38;5;82m            [         SELAMAT DATANG  DI CuCu_Atok             ] "
-echo -e "\e[38;5;82m             ===================================================="
-echo -e "\e[38;5;82m             #           WhatsApp     :                         #"
-echo -e "\e[38;5;82m             #           Telegram     : @cucu_atok              #"
-echo -e "\e[38;5;82m             #           GROUP        : -                       #"
-echo -e "\e[38;5;82m             #           Channel      : @NewPremiumService      #"
-echo -e "\e[38;5;82m             #--------------------------------------------------#"
-echo -e "\e[38;5;82m             #      Sila taip [menu] and ENTER untuk options    #"
-echo -e "\e[38;5;82m             #--------------------------------------------------#"
-echo -e "\e[38;5;82m             ===================================================="
+echo -e "\e[38;5;226m                               SELAMAT DATANG            "
+echo -e "\e[38;5;226m             ♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧"
+echo -e "\e[38;5;226m             ♣           WhatsApp     :                         ♣"
+echo -e "\e[38;5;225m             ♣           Telegram     : @cucu_atok              ♣"
+echo -e "\e[38;5;226m             ♣           GROUP        : -                       ♣"
+echo -e "\e[38;5;226m             ♣           Channel      : @NewPremiumService      ♣"
+echo -e "\e[38;5;266m             ♣--------------------------------------------------♣"
+echo -e "\e[38;5;226m             ♣      Sila taip [menu] and ENTER untuk options    ♣"
+echo -e "\e[38;5;226m             ♣--------------------------------------------------♣"
+echo -e "\e[38;5;226m             ♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧♧
 # check registered ip
 wget -q -O IP $source/IP.txt
 if ! grep -w -q $MYIP IP; then
-	echo -e "\e[38;5;226m Maaf, hanya IP yang terdaftar yang bisa menggunakan script ini!"
+	echo -e "\e[38;5;160m Maaf, hanya IP yang terdaftar yang bisa menggunakan script ini!"
 	if [[ $vps = "zvur" ]]; then
 		echo -e "\e[38;5;198m Hubungi: Telegram https://@cucu_atok)"
 	else
