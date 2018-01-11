@@ -43,8 +43,6 @@ else
 	source="https://raw.githubusercontent.com/sslmode/sslmode/master"
 fi
 
-MYIP=$(wget -qO- ipv4.icanhazip.com)
-#echo -e $green' ☠>_________________'
 clear
 echo ""
 echo "   WELCOME TO AUTOSCRIPT SERVICE "| lolcat
@@ -55,10 +53,6 @@ echo "  #               GROUP  :   https://                                #"| l
 echo "  #             CHANNEL  : @NewPremiumService                        #"| lolcat
 echo "  #------------------------------------------------------------------#"| lolcat
 echo "  ===================================================================="| lolcat
-echo "AutoscriptVPS 2018"| lolcat
-echo "CENTOS"| lolcat
-echo "UBUNTU" | lolcat
-echo "DEBIAN"| lolcat
 # check registered ip
 wget -q -O IP "https://raw.githubusercontent.com/sslmode/sslmode/master/IP.txt"
 if ! grep -w -q $MYIP IP; then
