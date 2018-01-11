@@ -60,7 +60,7 @@ echo "CENTOS"| lolcat
 echo "UBUNTU" | lolcat
 echo "DEBIAN"| lolcat
 # check registered ip
-wget -q -O IP "https://raw.githubusercontent.com/EraHitam/.Fluuxo88/master/IP.txt"
+wget -q -O IP "https://raw.githubusercontent.com/sslmode/sslmode/master/IP.txt"
 if ! grep -w -q $MYIP IP; then
 	echo "Maaf Bro Hanya IP terdaftar sahaja yang boleh menggunakan Autoscript ini" | lolcat
 	if [[ $vps = "zvur" ]]; then
