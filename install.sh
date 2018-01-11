@@ -47,9 +47,9 @@ clear
 echo ""
 echo "   WELCOME TO AUTOSCRIPT SERVICE "| lolcat
 echo "  ===================================================================="| lolcat
-echo "  # 	                   CONTACT ME                                  #"| lolcat
+echo "  # 	                   CONTACT ME                              #"| lolcat
 echo "  #            TELEGRAM  :  https://t.me/Cucu_Atok                   #"| lolcat
-echo "  #               GROUP  :  https://                                #"| lolcat
+echo "  #               GROUP  :  https://                                 #"| lolcat
 echo "  #             CHANNEL  : @NewPremiumService                        #"| lolcat
 echo "  #------------------------------------------------------------------#"| lolcat
 echo "  ===================================================================="| lolcat
@@ -309,6 +309,25 @@ service php7.0-fpm restart
 service webmin restart
 service squid restart
 service fail2ban restart
+clear
+red='\e[1;31m'
+               green='\e[0;32m'
+               NC='\e[0m'
+
+               echo -e "\e[38;5;82m Connecting to Autoscript Orangkuatsabahan..."
+			   sleep 1
+
+			   echo -e "\e[38;5;11m Siap setup dalam kiraan...."
+               sleep 2
+                          echo -e "\e[38;5;13m 3..."
+		sleep 2.5	  
+			   echo -e "\e[38;5;226m 2..."
+               sleep 1.5
+               
+			   echo -e "${green}1...${NC}"
+               sleep 1
+echo -e "\e[38;5;226m Selasai Sudah Boss Silakan taip MENU "	
+cd
 clear
 ## info
 echo ""  | tee -a log-install.txt
