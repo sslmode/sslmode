@@ -47,7 +47,7 @@ clear
 echo ""
 echo "   WELCOME TO AUTOSCRIPT SERVICE "| lolcat
 echo "  ===================================================================="| lolcat
-echo "  # 	                   CONTACT ME                              #"| lolcat
+echo "  # 	                   CONTACT ME                             #"| lolcat
 echo "  #            TELEGRAM  :  https://t.me/Cucu_Atok                   #"| lolcat
 echo "  #               GROUP  :  https://                                 #"| lolcat
 echo "  #             CHANNEL  : @NewPremiumService                        #"| lolcat
