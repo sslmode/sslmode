@@ -92,11 +92,25 @@ service exim4 stop;sysv-rc-conf exim4 off;
 # webmin
 apt-get -y install webmin
 sed -i 's/ssl=1/ssl=0/g' /etc/webmin/miniserv.conf
+sed -i 's/#Banner/Banner/g' /etc/ssh/sshd_config
 # dropbear
 apt-get -y install dropbear
 wget -O /etc/default/dropbear "http://rzvpn.net/random/dropbear"
+sed -i 's/DROPBEAR_BANNER=""/DROPBEAR_BANNER="\/etc\/issue.net"/g' /etc/default/dropbear
 echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
+service ssh restart
+service dropbear restart
+# upgrade dropbear 2017
+apt-get install zlib1g-dev
+wget https://matt.ucc.asn.au/dropbear/releases/dropbear-2017.75.tar.bz2
+bzip2 -cd dropbear-2017.75.tar.bz2  | tar xvf -
+cd dropbear-2017.75
+./configure
+make && make install
+mv /usr/sbin/dropbear /usr/sbin/dropbear1
+ln /usr/local/sbin/dropbear /usr/sbin/dropbear
+service dropbear restartgi
 # squid3
 apt-get -y install squid3
 wget -O /etc/squid3/squid.conf "http://rzvpn.net/random/squid.conf"
@@ -155,6 +169,17 @@ sed -i '/SixXS IPv6/d' config.php
 sed -i "s/\$locale = 'en_US.UTF-8';/\$locale = 'en_US.UTF+8';/g" config.php
 cd
 clear
+# text gambar
+apt-get install boxes
+
+# color text
+cd
+rm -rf /root/.bashrc
+wget -O /root/.bashrc "https://raw.githubusercontent.com/sslmode/sslmode/master/tools/.bashrc"
+
+# install lolcat
+sudo apt-get -y install ruby
+sudo gem install lolcat
 
 # download script
 cd
