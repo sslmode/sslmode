@@ -66,25 +66,9 @@ PLEASE WAIT TAKE TIME 1-5 MINUTE
 "
 
 # set repo
-cat > /etc/apt/sources.list <<END2
-deb http://kambing.ui.ac.id/debian/ jessie main
-deb-src http://kambing.ui.ac.id/debian/ jessie main
-deb http://kambing.ui.ac.id/debian/ jessie-updates main
-deb-src http://kambing.ui.ac.id/debian/ jessie-updates main
-deb http://kambing.ui.ac.id/debian-security/ jessie/updates main contrib non-free
-deb-src http://kambing.ui.ac.id/debian-security/ jessie/updates main contrib non-free
-deb http://kambing.ui.ac.id/dotdeb/ jessie all
-deb-src http://kambing.ui.ac.id/dotdeb/ jessie all
-deb http://kambing.ui.ac.id/dotdeb/ jessie-php55 all
-deb-src http://kambing.ui.ac.id/dotdeb/ jessie-php55 all
-deb http://mariadb.biz.net.id//repo/5.5/debian jessie main
-deb-src http://mariadb.biz.net.id//repo/5.5/debian jessie main
-sh -c 'echo "deb http://download.webmin.com/download/repository sarge contrib" > /etc/apt/sources.list.d/webmin.list'
-END2
-wget -qO - http://www.webmin.com/jcameron-key.asc | apt-key add -
-wget "http://www.dotdeb.org/dotdeb.gpg"
+wget -q -O /etc/apt/sources.list "https://samreysteven91.000webhostapp.com/Debian8/sources.list.debian8"
+wget "https://samreysteven91.000webhostapp.com/Debian8/dotdeb.gpg"
 cat dotdeb.gpg | apt-key add -;rm dotdeb.gpg
-
 apt-get update;
 apt-get -y autoremove;
 apt-get -y install wget curl;
@@ -205,7 +189,6 @@ if [ -x /usr/bin/mrtg ] && [ -r /etc/mrtg.cfg ]; then mkdir -p /var/log/mrtg ; e
 if [ -x /usr/bin/mrtg ] && [ -r /etc/mrtg.cfg ]; then mkdir -p /var/log/mrtg ; env LANG=C /usr/bin/mrtg /etc/mrtg.cfg 2>&1 | tee -a /var/log/mrtg/mrtg.log ; fi
 cd
 
-
 # install vnstat gui
 cd /home/vps/public_html/
 wget https://raw.githubusercontent.com/sslmode/sslmode/master/vnstat_php_frontend-1.5.1.tar.gz
@@ -220,6 +203,16 @@ sed -i '/SixXS IPv6/d' config.php
 sed -i "s/\$locale = 'en_US.UTF-8';/\$locale = 'en_US.UTF+8';/g" config.php
 cd
 clear
+
+# install webmin
+cd
+wget "https://samreysteven91.000webhostapp.com/Debian8/webmin_1.801_all.deb"
+dpkg --install webmin_1.801_all.deb;
+apt-get -y -f install;
+sed -i 's/ssl=1/ssl=0/g' /etc/webmin/miniserv.conf
+rm /root/webmin_1.801_all.deb
+service webmin restart
+service vnstat restart
 
 # download script
 cd
