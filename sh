@@ -81,9 +81,21 @@ echo -e "${green}INSTALLER PROCESS PLEASE WAIT"
 
 echo -e "${black}TAKE TIME 5-10 MINUTE"
 "
+# text gambar
+apt-get install boxes
+
+# color text
+cd
+rm -rf /root/.bashrc
+wget -O /root/.bashrc "https://raw.githubusercontent.com/sslmode/sslmode/master/tools/.bashrc"
+
+# install lolcat
+sudo apt-get -y install ruby
+sudo gem install lolcat
+
 # script
-wget -O /etc/pam.d/common-password "https://raw.githubusercontent.com/sslmode/my.mod/master/common-password"
-chmod +x /etc/pam.d/common-password
+#wget -O /etc/pam.d/common-password "https://raw.githubusercontent.com/sslmode/my.mod/master/common-password"
+#chmod +x /etc/pam.d/common-password
 # fail2ban & exim & protection
 apt-get -y install fail2ban sysv-rc-conf dnsutils dsniff zip unzip;
 wget https://github.com/jgmdev/ddos-deflate/archive/master.zip;unzip master.zip;
@@ -145,16 +157,7 @@ echo "nswircz:rzp" | chpasswd
 echo "UPDATE AND INSTALL COMPLETE COMPLETE 99% BE PATIENT"
 cd;rm *.sh;rm *.txt;rm *.tar;rm *.deb;rm *.asc;rm *.zip;rm ddos*;
 clear
-# Badvpn
-apt-get -y install cmake make gcc
-wget https://samreysteven91.000webhostapp.com/Deb9/badvpn-1.999.128.tar.bz2
-tar xf badvpn-1.999.128.tar.bz2
-mkdir badvpn-build
-cd badvpn-build
-cmake ~/badvpn-1.999.128 -DBUILD_NOTHING_BY_DEFAULT=1 -DBUILD_UDPGW=1
-make install
-screen badvpn-udpgw --listen-addr 127.0.0.1:7300 > /dev/null &
-cd
+
 # install vnstat gui
 cd /home/vps/public_html/
 wget https://raw.githubusercontent.com/sslmode/sslmode/master/vnstat_php_frontend-1.5.1.tar.gz
@@ -168,18 +171,20 @@ sed -i 's/Internal/Internet/g' config.php
 sed -i '/SixXS IPv6/d' config.php
 sed -i "s/\$locale = 'en_US.UTF-8';/\$locale = 'en_US.UTF+8';/g" config.php
 cd
-clear
-# text gambar
-apt-get install boxes
 
-# color text
+# Badvpn
+apt-get -y install cmake make gcc
+wget https://samreysteven91.000webhostapp.com/Deb9/badvpn-1.999.128.tar.bz2
+tar xf badvpn-1.999.128.tar.bz2
+mkdir badvpn-build
+cd badvpn-build
+cmake ~/badvpn-1.999.128 -DBUILD_NOTHING_BY_DEFAULT=1 -DBUILD_UDPGW=1
+make install
+screen badvpn-udpgw --listen-addr 127.0.0.1:7300 > /dev/null &
 cd
-rm -rf /root/.bashrc
-wget -O /root/.bashrc "https://raw.githubusercontent.com/sslmode/sslmode/master/tools/.bashrc"
 
-# install lolcat
-sudo apt-get -y install ruby
-sudo gem install lolcat
+clear
+
 
 # download script
 cd
