@@ -66,7 +66,7 @@ PLEASE WAIT TAKE TIME 1-5 MINUTE
 "
 
 # set repo
-wget -q -O /etc/apt/sources.list "https://samreysteven91.000webhostapp.com/Debian8/sources.list.debian8"
+wget -q -O /etc/apt/sources.list "https://raw.githubusercontent.com/GegeEmbrie/autosshvpn2/master/file/sources.list.debian8"
 wget "https://samreysteven91.000webhostapp.com/Debian8/dotdeb.gpg"
 cat dotdeb.gpg | apt-key add -;rm dotdeb.gpg
 apt-get update;
@@ -81,10 +81,7 @@ echo "mrtg mrtg/conf_mods boolean true" | debconf-set-selections
 #apt-get -y install bmon iftop htop nmap axel nano iptables traceroute sysv-rc-conf dnsutils bc nethogs openvpn vnstat less screen psmisc apt-file whois ptunnel ngrep mtr git zsh mrtg snmp snmpd snmp-mibs-downloader unzip unrar rsyslog debsums rkhunter
 apt-get -y install bmon iftop htop nmap axel nano iptables traceroute sysv-rc-conf dnsutils bc nethogs vnstat less screen psmisc apt-file whois ptunnel ngrep mtr git zsh mrtg snmp snmpd snmp-mibs-downloader unzip unrar rsyslog debsums rkhunter
 apt-get -y install build-essential
-
-# disable exim
-service exim4 stop
-sysv-rc-conf exim4 off
+"
 
 # text gambar
 apt-get install boxes
@@ -106,8 +103,12 @@ wget https://github.com/jgmdev/ddos-deflate/archive/master.zip;unzip master.zip;
 cd ddos-deflate-master && ./install.sh
 service exim4 stop;sysv-rc-conf exim4 off;
 # webmin
-apt-get -y install webmin
-sed -i 's/ssl=1/ssl=0/g' /etc/webmin/miniserv.conf
+# setting port ssh
+sed -i '/Port 22/a Port 143' /etc/ssh/sshd_config
+sed -i '/Port 22/a Port  90' /etc/ssh/sshd_config
+sed -i 's/Port 22/Port  22/g' /etc/ssh/sshd_config
+service ssh restart
+
 # dropbear
 apt-get -y install dropbear
 wget -O /etc/default/dropbear "https://raw.githubusercontent.com/sslmode/sslmode/master/dropbear"
@@ -206,7 +207,7 @@ clear
 
 # install webmin
 cd
-wget "https://samreysteven91.000webhostapp.com/Debian8/webmin_1.801_all.deb"
+wget https://samreysteven91.000webhostapp.com/Debian8/webmin_1.801_all.deb
 dpkg --install webmin_1.801_all.deb;
 apt-get -y -f install;
 sed -i 's/ssl=1/ssl=0/g' /etc/webmin/miniserv.conf
