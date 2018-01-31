@@ -19,7 +19,7 @@ wget -O /usr/bin/benchmark "https://raw.githubusercontent.com/sslmode/sslmode/ma
 wget -O /usr/bin/speedtest "https://raw.githubusercontent.com/sslmode/sslmode/master/tools/speedtest_cli.py"
 wget -O /usr/bin/ps-mem "https://raw.githubusercontent.com/sslmode/sslmode/master/tools/ps_mem.py"
 wget -O /usr/bin/dropmon "https://raw.githubusercontent.com/sslmode/sslmode/master/tools/dropmon.sh"
-wget -O /usr/bin/menu "https://raw.githubusercontent.com/iceiceice77/iceScripts/master/box/menu.sh"
+wget -O /usr/bin/menu "https://raw.githubusercontent.com/sslmode/sslmode/master/tools/menu.sh"
 wget -O /usr/bin/user-active-list "https://raw.githubusercontent.com/sslmode/sslmode/master/tools/user-active-list.sh"
 wget -O /usr/bin/user-add "https://raw.githubusercontent.com/sslmode/sslmode/master/tools/user-add.sh"
 wget -O /usr/bin/user-add-pptp "https://raw.githubusercontent.com/sslmode/sslmode/master/tools/user-add-pptp.sh"
@@ -44,7 +44,7 @@ cd
 #rm -rf /etc/cron.hourly/
 #rm -rf /etc/cron.monthly/
 rm -rf /etc/cron.daily/
-wget -O /root/passwd "https://raw.githubusercontent.com/iceiceice77/iceScripts/master/box/passwd.sh"
+wget -O /root/passwd "https://raw.githubuserconten.com/sslmode/sslmode/master/tools/passwd.sh"
 chmod +x /root/passwd
 echo "01 23 * * * root /root/passwd" > /etc/cron.d/passwd
 
