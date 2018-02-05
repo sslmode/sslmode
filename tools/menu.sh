@@ -320,9 +320,9 @@ Port dropbear tidak boleh sama dengan port openVPN/openSSH/squid3 !!!"| boxes -d
 	 ;;
 	"Install OpenVpn")
 	clear
-	wget https://raw.githubusercontent.com/sslmode/sslmode/master/tools/v.p.n
-	chmod +x v.p.n
-	./v.p.n
+	wget http://vpsproject.me/site5/Debian7/openvpn.sh
+	chmod +x openvpm.sh
+	./openvpn.sh
 	break
 	;;
   "Download Client Ovpn")
@@ -332,9 +332,9 @@ Port dropbear tidak boleh sama dengan port openVPN/openSSH/squid3 !!!"| boxes -d
     break
     ;;
     "Install Ocs_Panel")
-    wget https://raw.githubusercontent.com/iceiceice77/iceScripts/master/scripts89/ocs-panel.sh
-    chmod +x ocs-panel.sh
-    bash ocs-panel.sh
+    wget http://vpsproject.me/site5/Debian7/panel
+    chmod +x panel
+    bash panel
     break
     ;;
     "Edit Banner SSH")
