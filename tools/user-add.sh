@@ -43,20 +43,16 @@ echo -e "============[[-SERVER-PREMIUM-]]===========" | lolcat
 echo -e "     Host: $MYIP" | lolcat
 echo -e "     Username: $username" | lolcat
 echo -e "     Password: $password                   " | lolcat
-echo -e "     Port default dropbear: 443,80         " | lolcat
-echo -e "     Port default openSSH : 22,143         " | lolcat
-echo -e "     Port default squid   : 8080,3128      " | lolcat
-echo -e "                                           " | lolcat
-echo -e "     Auto kill user maximal login 2        " | lolcat
-echo -e "-------------------------------------------" | lolcat
 echo -e "     Expired Date: $(date -d "$AKTIF days" +"%d-%m-%Y")" | lolcat
 echo -e "===========================================" | lolcat
-echo -e "   WARNING BAN FOR:                              "| lolcat
-echo -e "   HACKING-DDOS-PHISING-SPAM-TORENT        " | lolcat
-echo -e "   CARDING-CRIMINAL CYBER.                 "| lolcat
+echo -e "     Port default dropbear: 442,109,110    " | lolcat
+echo -e "     Port default openSSH : 22,90          " | lolcat
+echo -e "     Port defaulr SSL     : 443            " | lolcat
+echo -e "     Port default squid   : 8080,3128      " | lolcat
 echo -e "===========================================" | lolcat
+echo -e "     Auto kill user maximal login 2        " | lolcat
 echo -e "   Config OVPN:                            "| lolcat
-echo -e "   http://$MYIP:81/client.ovpn       " | lolcat
+echo -e "   http://$MYIP:81/client.ovpn             " | lolcat
 echo -e "-------------------------------------------" | lolcat
 echo -e ""
 echo -e ""
