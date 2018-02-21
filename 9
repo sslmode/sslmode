@@ -22,15 +22,6 @@ fi
 # go to root
 cd
 
-# check registered ip
-wget -q -O /etc/imd https://raw.githubusercontent.com/akumasih112/code/master/daftarip.txt
-wget -q -O daftarip https://raw.githubusercontent.com/akumasih112/code/master/daftarip.txt
-if ! grep -w -q $MYIP daftarip; then
-	echo "Maaf, hanya IP terdaftar yang bisa menggunakan script ini!"
-	echo "Hubungi Roziq Yusuf (Whatsapp: 081234054359)"
-	rm -f /root/daftarip
-	exit
-fi
 
     NORMAL=`echo "\033[m"`
     MENU=`echo "\033[36m"` #Blue
@@ -41,7 +32,23 @@ fi
     ENTER_LINE=`echo "\033[33m"`
 	LRED=`echo "\033[0m\033[1;31m"`
 	BLUE=`echo "\033[0m\033[1;36m"`
+# update
+apt-get update
 
+# upgrade
+apt-get upgrade -y  -q
+
+# install certificates
+apt-get install ca-certificates
+
+# detail
+country=MY
+state=Terengganu
+locality=-
+organization=Interpass
+organizationalunit=InterpassGroup
+commonname=Hake
+email=-
 
 # go to root
 cd
