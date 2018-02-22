@@ -47,6 +47,14 @@ echo "
 REMOVE SPAM PACKAGE
 COMPLETE 10%
 "
+# detail
+country=ID
+state=Terengganu
+locality=.
+organization=.
+organizationalunit=.
+commonname=Hake
+email=.
 apt-get -y --purge remove samba*;
 apt-get -y --purge remove apache2*;
 apt-get -y --purge remove sendmail*;
