@@ -50,7 +50,7 @@ do
 	;;
 	"All User")
 	clear
-	user-list | lolcat
+	user-list
 	break
 	;;
 	"Delete User")
