@@ -558,4 +558,4 @@ echo "THANK YOU FOR CHOICE US!!" | tee -a log-install.txt | lolcat
 echo "" | tee -a log-install.txt | lolcat
 echo " !!! SILAHKAN REBOOT VPS ANDA !!!" | tee -a log-install.txt | lolcat
 echo "=======================================================" | tee -a log-install.txt | lolcat
-rm -f /root/debian8
+rm -f /root/44
