@@ -7,46 +7,6 @@
 myip=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0' | head -n1`;
 myint=`ifconfig | grep -B1 "inet addr:$myip" | head -n1 | awk '{print $1}'`;
 
-red='\e[1;31m'
-green='\e[0;32m'
-NC='\e[0m'
-echo "Connecting to KaizenApeach.net..."
-sleep 0.5
-echo "Checking Permision..."
-sleep 0.5
-echo -e "${green}Permission Accepted...${NC}"
-sleep 1
-	       
-flag=0
-
-clear
-wget --quiet -O iplist.txt https://raw.githubusercontent.com/Apeachsan91/setup/master/ip.txt
-
-iplist="iplist.txt"
-
-lines=`cat $iplist`
-#echo $lines
-
-for line in $lines; do
-#        echo "$line"
-        if [ "$line" = "$myip" ];
-        then
-                flag=1
-        fi
-
-done
-
-if [ $flag -eq 0 ]
-then
-echo  "Maaf, hanya IP @ Password yang terdaftar sahaja boleh menggunakan script ini!
-Hubungi		: Kaizen Apeach
-Telegram 	: @KaizenA
-Email 		: hazboyz@gmail.com"
-
-rm -f /root/iplist.txt
-exit 1
-fi
-
 #Requirement
 if [ ! -e /usr/bin/curl ]; then
     apt-get -y update && apt-get -y upgrade
@@ -122,25 +82,6 @@ apt-file update
 # setting vnstat
 vnstat -u -i eth0
 service vnstat restart
-
-#Install Figlet
-apt-get install figlet
-echo "clear" >> .bashrc
-echo 'echo -e ""' >> .bashr
-echo 'echo -e ""' >> .bashrc
-echo 'figlet -k "            Apeach"' >> .bashrc
-echo 'echo -e ""' >> .bashrc
-echo 'echo -e "     ========================================================="' >> .bashrc
-echo 'echo -e "     *        Script By Kaizen Apeach | Tester Hacker        *"' >> .bashrc
-echo 'echo -e "     ========================================================="' >> .bashrc
-echo 'echo -e "     *                     Contact Me                        *"' >> .bashrc
-echo 'echo -e "     *                Facebook: Al-hafiez Apeach             *"' >> .bashrc
-echo 'echo -e "     *                Whatsapp: +60178958795                 *"' >> .bashrc
-echo 'echo -e "     *                Telegram: @KaizenA                     *"' >> .bashrc
-echo 'echo -e "     ========================================================="' >> .bashrc
-echo 'echo -e "     *       Taip \033[1;32mmenu\033[0m untuk menampilkan senarai menu        *"' >> .bashrc
-echo 'echo -e "     ========================================================="' >> .bashrc
-echo 'echo -e ""' >> .bashrc
 
 # install webserver
 cd
