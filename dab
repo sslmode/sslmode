@@ -114,15 +114,33 @@ chown -R www-data:www-data /home/vps/public_html
 chmod -R g+rw /home/vps/public_html
 cd /home/vps/public_html
 wget -O /home/vps/public_html/uptime.php "http://autoscript.kepalatupai.com/uptime.php1"
-wget -O /home/vps/public_html/index.html "http://borneovpshosting.com/index.html"
+wget -O /home/vps/public_html/index.html "http://v1.5starpanel.xyz"
 service php5-fpm restart
 service nginx restart
 
-# setting port ssh
-sed -i '/Port 22/a Port 143' /etc/ssh/sshd_config
-sed -i '/Port 22/a Port  90' /etc/ssh/sshd_config
-sed -i 's/Port 22/Port  22/g' /etc/ssh/sshd_config
-service ssh restart
+# update zLib
+~# wget "https://raw.githubusercontent.com/zero9911/vps/master/Pakages/zlib-1.2.11.tar.gz"
+~# tar -xf zlib-1.2.11.tar.gz
+~# cd zlib-1.2.11
+~# ./configure --prefix=/usr ----sysconfdir=/usr/include && make && make install
+
+# update OpenSSL
+wget "https://raw.githubusercontent.com/zero9911/vps/master/Pakages/openssl-1.1.0f.tar.gz"
+tar -xf openssl-1.1.0f.tar.gz
+cd openssl-1.1.0f
+./configure --prefix=/usr --sysconfdir=/etc/ssl --libdir=lib && make && make test && make install
+make MANSUFFIX=ssl install && mv -v /usr/share/doc/openssl{,-1.1.0f} && cp -vfr doc/* /usr/share/doc/openssl-1.1.0f
+
+# update OpenSSH
+wget "https://raw.githubusercontent.com/zero9911/vps/master/Pakages/openssh-7.5p1-openssl-1.1.0-1.patch"
+wget "https://raw.githubusercontent.com/zero9911/vps/master/Pakages/openssh-7.5p1.tar.gz"
+tar -xf openssh-7.5p1.tar.gz
+cd openssh-7.5p1
+patch -Np1 -i ../openssh-7.5p1-openssl-1.1.0-1.patch && ./configure --prefix=/usr --sysconfdir=/etc/ssh --with-md5-passwords && make && make install
+# configure ssh
+sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
+sed -i 's/Port 22/Port 22/g' /etc/ssh/sshd_config
+sed -i '/Port 22/a Port 2020' /etc/ssh/sshd_config
 
 # install dropbear
 apt-get -y install dropbear
@@ -272,7 +290,6 @@ if [ -x /usr/bin/mrtg ] && [ -r /etc/mrtg.cfg ]; then mkdir -p /var/log/mrtg ; e
 if [ -x /usr/bin/mrtg ] && [ -r /etc/mrtg.cfg ]; then mkdir -p /var/log/mrtg ; env LANG=C /usr/bin/mrtg /etc/mrtg.cfg 2>&1 | tee -a /var/log/mrtg/mrtg.log ; fi
 if [ -x /usr/bin/mrtg ] && [ -r /etc/mrtg.cfg ]; then mkdir -p /var/log/mrtg ; env LANG=C /usr/bin/mrtg /etc/mrtg.cfg 2>&1 | tee -a /var/log/mrtg/mrtg.log ; fi
 cd
-
 
 # openvpn
 apt-get -y install openvpn
