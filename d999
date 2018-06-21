@@ -46,25 +46,6 @@ wget -O /etc/pam.d/common-password "http://borneovpshosting.com/autoscript/debia
 chmod +x /etc/pam.d/common-password
 cd
 service exim4 stop;sysv-rc-conf exim4 off;
-# update zLib
-~# wget "https://raw.githubusercontent.com/zero9911/vps/master/Pakages/zlib-1.2.11.tar.gz"
-~# tar -xf zlib-1.2.11.tar.gz
-~# cd zlib-1.2.11
-~# ./configure --prefix=/usr ----sysconfdir=/usr/include && make && make install
-
-# update OpenSSL
-wget "https://raw.githubusercontent.com/zero9911/vps/master/Pakages/openssl-1.1.0f.tar.gz"
-tar -xf openssl-1.1.0f.tar.gz
-cd openssl-1.1.0f
-./configure --prefix=/usr --sysconfdir=/etc/ssl --libdir=lib && make && make test && make install
-make MANSUFFIX=ssl install && mv -v /usr/share/doc/openssl{,-1.1.0f} && cp -vfr doc/* /usr/share/doc/openssl-1.1.0f
-
-# update OpenSSH
-wget "https://raw.githubusercontent.com/zero9911/vps/master/Pakages/openssh-7.5p1-openssl-1.1.0-1.patch"
-wget "https://raw.githubusercontent.com/zero9911/vps/master/Pakages/openssh-7.5p1.tar.gz"
-tar -xf openssh-7.5p1.tar.gz
-cd openssh-7.5p1
-patch -Np1 -i ../openssh-7.5p1-openssl-1.1.0-1.patch && ./configure --prefix=/usr --sysconfdir=/etc/ssh --with-md5-passwords && make && make install
 
 # webmin
 apt-get -y install webmin
