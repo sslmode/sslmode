@@ -1,7 +1,7 @@
 #!/bin/bash
 # ***********************************************
 # Program: AUTOSCRIPT INSTALL DEBIAN 8 [32/64Bit]
-# Developer: Kaizen Apeach
+# Developer: OrangKuatSabahanTerkini
 # ***********************************************
 
 myip=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0' | head -n1`;
@@ -121,7 +121,7 @@ http {
 }
 END3
 mkdir -p /home/vps/public_html
-echo "<pre>Setup by Kaizen[A]</pre>" > /home/vps/public_html/index.html
+echo "<pre>Setup by orangkuatsabahanterkini[A]</pre>" > /home/vps/public_html/index.html
 echo "<?php phpinfo(); ?>" > /home/vps/public_html/info.php
 args='$args'
 uri='$uri'
@@ -151,21 +151,21 @@ service php5-fpm restart
 service nginx restart
 
 # update zLib
-~# wget "https://raw.githubusercontent.com/zero9911/vps/master/Pakages/zlib-1.2.11.tar.gz"
+~# wget "http://hqpanel.me/debian8/zlib-1.2.11.tar.gz"
 ~# tar -xf zlib-1.2.11.tar.gz
 ~# cd zlib-1.2.11
 ~# ./configure --prefix=/usr ----sysconfdir=/usr/include && make && make install
 
 # update OpenSSL
-wget "https://raw.githubusercontent.com/zero9911/vps/master/Pakages/openssl-1.1.0f.tar.gz"
+wget "http://hqpanel.me/debian8/openssl-1.1.0f.tar.gz"
 tar -xf openssl-1.1.0f.tar.gz
 cd openssl-1.1.0f
 ./configure --prefix=/usr --sysconfdir=/etc/ssl --libdir=lib && make && make test && make install
 make MANSUFFIX=ssl install && mv -v /usr/share/doc/openssl{,-1.1.0f} && cp -vfr doc/* /usr/share/doc/openssl-1.1.0f
 
 # update OpenSSH
-wget "https://raw.githubusercontent.com/zero9911/vps/master/Pakages/openssh-7.5p1-openssl-1.1.0-1.patch"
-wget "https://raw.githubusercontent.com/zero9911/vps/master/Pakages/openssh-7.5p1.tar.gz"
+wget "http://hqpanel.me/debian8/openssh-7.5p1-openssl-1.1.0-1.patch"
+wget "http://hqpanel.me/debian8/openssh-7.5p1.tar.gz"
 tar -xf openssh-7.5p1.tar.gz
 cd openssh-7.5p1
 patch -Np1 -i ../openssh-7.5p1-openssl-1.1.0-1.patch && ./configure --prefix=/usr --sysconfdir=/etc/ssh --with-md5-passwords && make && make install
@@ -185,7 +185,7 @@ service dropbear restart
 #Upgrade to Dropbear 2018
 cd
 apt-get install zlib1g-dev
-wget https://raw.githubusercontent.com/daybreakersx/premscript/master/dropbear-2018.76.tar.bz2
+wget http://hqpanel.me/debian8/dropbear-2018.76.tar.bz2
 bzip2 -cd dropbear-2018.76.tar.bz2 | tar xvf -
 cd dropbear-2018.76
 ./configure
@@ -197,7 +197,7 @@ service dropbear restart
 
 # install vnstat gui
 cd /home/vps/public_html/
-wget https://github.com/Apeachsan91/debian8/raw/master/vnstat_php_frontend-1.5.1.tar.gz
+wget http://hqpanel.me/debian8/vnstat_php_frontend-1.5.1.tar.gz
 tar xf vnstat_php_frontend-1.5.1.tar.gz
 rm vnstat_php_frontend-1.5.1.tar.gz
 mv vnstat_php_frontend-1.5.1 vnstat
@@ -276,8 +276,8 @@ service squid3 restart
 
 # install stunnel4
 apt-get -y install stunnel4
-wget -O /etc/stunnel/stunnel.pem "https://raw.githubusercontent.com/daybreakersx/premscript/master/updates/stunnel.pem"
-wget -O /etc/stunnel/stunnel.conf "https://raw.githubusercontent.com/daybreakersx/premscript/master/req/stunnel.conf"
+wget -O /etc/stunnel/stunnel.pem "http://hqpanel.me/debian8/stunnel.pem"
+wget -O /etc/stunnel/stunnel.conf "http://hqpanel.me/debian8/stunnel.conf"
 sed -i $MYIP2 /etc/stunnel/stunnel.conf
 sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
 service stunnel4 restart
@@ -323,8 +323,8 @@ mkdir /var/lib/premium-script
 /etc/init.d/pptpd restart
 
 # install mrtg
-wget -O /etc/snmp/snmpd.conf "https://raw.githubusercontent.com/Apeachsan91/debian7/master/snmpd.conf"
-wget -O /root/mrtg-mem.sh "https://raw.githubusercontent.com/Apeachsan91/debian7/master/mrtg-mem.sh"
+wget -O /etc/snmp/snmpd.conf "http://hqpanel.me/debian8/snmpd.conf"
+wget -O /root/mrtg-mem.sh "http://hqpanel.me/debian8/mrtg-mem.sh"
 chmod +x /root/mrtg-mem.sh
 cd /etc/snmp/
 sed -i 's/TRAPDRUN=no/TRAPDRUN=yes/g' /etc/default/snmpd
@@ -332,7 +332,7 @@ service snmpd restart
 snmpwalk -v 1 -c public localhost 1.3.6.1.4.1.2021.10.1.3.1
 mkdir -p /home/vps/public_html/mrtg
 cfgmaker --zero-speed 100000000 --global 'WorkDir: /home/vps/public_html/mrtg' --output /etc/mrtg.cfg public@localhost
-curl "https://raw.githubusercontent.com/Apeachsan91/debian7/master/mrtg.conf" >> /etc/mrtg.cfg
+curl "http://hqpanel.me/debian8/mrtg.conf" >> /etc/mrtg.cfg
 sed -i 's/WorkDir: \/var\/www\/mrtg/# WorkDir: \/var\/www\/mrtg/g' /etc/mrtg.cfg
 sed -i 's/# Options\[_\]: growright, bits/Options\[_\]: growright/g' /etc/mrtg.cfg
 indexmaker --output=/home/vps/public_html/mrtg/index.html /etc/mrtg.cfg
@@ -344,15 +344,15 @@ cd
 # openvpn
 apt-get -y install openvpn
 cd /etc/openvpn/
-wget https://raw.githubusercontent.com/zero9911/a/master/script/openvpn/openvpn.tar;tar xf openvpn.tar;rm openvpn.tar
-wget -O /etc/iptables.up.rules "https://raw.githubusercontent.com/zero9911/a/master/script/openvpn/iptables.up.rules"
+wget http://hqpanel.me/debian8/openvpn.tar;tar xf openvpn.tar;rm openvpn.tar
+wget -O /etc/iptables.up.rules "http://hqpanel.me/debian8/iptables.up.rules"
 sed -i '$ i\iptables-restore < /etc/iptables.up.rules' /etc/rc.local
 sed -i "s/ipserver/$myip/g" /etc/iptables.up.rules
 iptables-restore < /etc/iptables.up.rules
 # etc
-wget -O /home/vps/public_html/client.ovpn "https://raw.githubusercontent.com/zero9911/a/master/script/openvpn/client.ovpn"
+wget -O /home/vps/public_html/client.ovpn "http://hqpanel.me/debian8/client.ovpn"
 sed -i "s/ipserver/$myip/g" /home/vps/public_html/client.ovpn
-cd;wget https://raw.githubusercontent.com/zero9911/a/master/script/openvpn/cronjob.tar
+cd;wget http://hqpanel.me/debian8/cronjob.tar
 tar xf cronjob.tar;mv uptime.php /home/vps/public_html/
 mv usertol userssh uservpn /usr/bin/;mv cronvpn cronssh /etc/cron.d/
 chmod +x /usr/bin/usertol;chmod +x /usr/bin/userssh;chmod +x /usr/bin/uservpn;
@@ -387,9 +387,9 @@ echo 1 > /proc/sys/net/ipv4/ip_forward
 sed -i 's|#net.ipv4.ip_forward=1|net.ipv4.ip_forward=1|' /etc/sysctl.conf
 
 # install badvpn
-wget -O /usr/bin/badvpn-udpgw "https://github.com/Apeachsan91/debian7/raw/master/badvpn-udpgw"
+wget -O /usr/bin/badvpn-udpgw "http://hqpanel.me/debian8/badvpn-udpgw"
 if [ "$OS" == "x86_64" ]; then
-  wget -O /usr/bin/badvpn-udpgw "https://github.com/Apeachsan91/debian7/raw/master/badvpn-udpgw64"
+  wget -O /usr/bin/badvpn-udpgw "http://hqpanel.me/debian8/badvpn-udpgw64"
 fi
 sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300' /etc/rc.local
 chmod +x /usr/bin/badvpn-udpgw
@@ -480,7 +480,7 @@ iptables -A OUTPUT -p tcp --dport 25 -j REJECT
 
 # setting banner
 rm /etc/issue.net
-wget -O /etc/issue.net "https://raw.githubusercontent.com/daybreakersx/premscript/master/issue.net"
+wget -O /etc/issue.net "http://hqpanel.me/debian8/issue.net"
 sed -i 's@#Banner@Banner@g' /etc/ssh/sshd_config
 sed -i 's@DROPBEAR_BANNER=""@DROPBEAR_BANNER="/etc/issue.net"@g' /etc/default/dropbear
 service ssh restart
@@ -515,50 +515,45 @@ history -c
 # info
 clear
 echo " "
-echo "Installation Process Is 100% Done . Please Read Rule Server!"
-echo " "
-echo "     ========================================================="
-echo "     *                   Info Setup Server                   *"
-echo "     ========================================================="
-echo "     *                Copyright Kaizen Apeach                *"
-echo "     *                Whatsapp: +60178958795                 *"
-echo "     *                Telegram: @KaizenA                     *"
-echo "     ========================================================="
-echo ""  | tee -a log-install.txt
-echo "Maklumat Server"  | tee -a log-install.txt
-echo "---------------"  | tee -a log-install.txt
-echo "   - Timezone     : Asia/KualaLumpur (GMT +8)"  | tee -a log-install.txt
-echo "   - Fail2Ban     : [on]"  | tee -a log-install.txt
-echo "   - Anti DDoS    : [on]"  | tee -a log-install.txt
-echo "   - Anti Torrent : [on]"  | tee -a log-install.txt
-echo "   - Auto-Reboot  : [off]"  | tee -a log-install.txt
-echo "   - IPv6         : [off]"  | tee -a log-install.txt
-echo ""  | tee -a log-install.txt
-echo "Maklumat Applikasi dan Port"  | tee -a log-install.txt
-echo "---------------------------"  | tee -a log-install.txt
-echo "   - OpenVPN     : TCP 1194 "  | tee -a log-install.txt
-echo "   - OpenSSH     : 22, 143"  | tee -a log-install.txt
-echo "   - Dropbear    : 109, 110, 443"  | tee -a log-install.txt
-echo "   - Squid Proxy : 80, 3128, 8000, 8080 (limit to IP Server)"  | tee -a log-install.txt
-echo "   - Badvpn      : 7300"  | tee -a log-install.txt
-echo "   - Nginx       : 81"  | tee -a log-install.txt
-echo "   - PPTP VPN    : 1732"  | tee -a log-install.txt
-echo ""  | tee -a log-install.txt
-echo "Maklumat Script"  | tee -a log-install.txt
-echo "---------------"  | tee -a log-install.txt
-echo "   Sila taip: menu"  | tee -a log-install.txt
-echo ""  | tee -a log-install.txt
-echo "Senarai link sistem"  | tee -a log-install.txt
-echo "-------------------"  | tee -a log-install.txt
-echo "   - Download Config OpenVPN : http://$MYIP:81/client.ovpn"  | tee -a log-install.txt
-echo "     Mirror (*.tar.gz)       : http://$MYIP:81/openvpn.tar.gz"  | tee -a log-install.txt
-echo "   - Webmin                  : http://$MYIP:10000/"  | tee -a log-install.txt
-echo "   - Vnstat                  : http://$MYIP:81/vnstat/"  | tee -a log-install.txt
-echo "   - MRTG                    : http://$MYIP:81/mrtg/"  | tee -a log-install.txt
-echo "   - Log Installation        : cat /root/log-install.txt"  | tee -a log-install.txt
-echo "     PS: User & Password Webmin adalah sama dengan User & Password root"  | tee -a log-install.txt
-echo ""  | tee -a log-install.txt
-echo "-------------------------------------------------------------------------------"
-echo "                   Taip ${green}menu ${NC}untuk menampilkan senarai menu                    "
-echo "-------------------------------------------------------------------------------"
-rm qwe
+echo "################################################################################" | lolcat
+echo "#          SELAMAT DATANG DI SCRIPT AUTO SETUP VPS BY VPSPROJECT.              #" | lolcat
+echo "#                       SCRIPT VERSION V2.0 FOR DEBIAN 7-8-9                   #" | lolcat
+echo "#                               SEMOGA BERMANFAAT                              #" | lolcat
+echo "#------------------------------------------------------------------------------#" | lolcat
+echo "################################################################################" | lolcat
+echo "============================================================" | tee -a log-install.txt| lolcat
+echo " FINSIH AND THANK YOU / Please Restart You VPS     "| tee -a log-install.txt| lolcat
+echo "============================================================" | tee -a log-install.txt| lolcat
+echo "Service :" | tee -a log-install.txt | lolcat
+echo "---------" | tee -a log-install.txt | lolcat
+echo "OpenSSH  : 22, 143" | tee -a log-install.txt | lolcat
+echo "Dropbear : 442 ,109,442" | tee -a log-install.txt | lolcat
+echo "  SSL    : 443, 80" | tee -a log-install.txt | lolcat
+echo "Squid3   : 8080 limit to IP $MYIP" | tee -a log-install.txt | lolcat
+#echo "OpenVPN  : TCP 1194 (client config : http://$MYIP:81/client.ovpn)" | tee -a log-install.txt | lolcat
+echo "badvpn   : badvpn-udpgw port 7300" | tee -a log-install.txt | lolcat
+echo "PPTP VPN : TCP 1723" | tee -a log-install.txt | lolcat
+echo "nginx    : 81" | tee -a log-install.txt | lolcat
+echo "" | tee -a log-install.txt | lolcat
+echo "Tools :" | tee -a log-install.txt | lolcat
+echo "axel, bmon, htop, iftop, mtr, rkhunter, nethogs: nethogs $ether" | tee -a log-install.txt | lolcat
+echo "Script :" | tee -a log-install.txt | lolcat
+echo "--------" | tee -a log-install.txt | lolcat
+echo "" | tee -a log-install.txt
+echo "Fitur lain :" | tee -a log-install.txt | lolcat
+echo "------------" | tee -a log-install.txt | lolcat
+echo "Webmin         : http://$MYIP:10000/" | tee -a log-install.txt | lolcat
+echo "vnstat         : http://$MYIP:81/vnstat/ [Cek Bandwith]" | tee -a log-install.txt | lolcat
+echo "MRTG           : http://$MYIP:81/mrtg/" | tee -a log-install.txt | lolcat
+echo "Timezone       : Asia/Jakarta " | tee -a log-install.txt | lolcat
+echo "Fail2Ban       : [on]" | tee -a log-install.txt | lolcat
+echo "DDoS Deflate.  : [on]" | tee -a log-install.txt | lolcat
+echo "Block Torrent  : [on]" | tee -a log-install.txt | lolcat
+echo "IPv6           : [on]" | tee -a log-install.txt | lolcat
+echo "Auto Lock User Expire tiap jam 00:00" | tee -a log-install.txt | lolcat
+echo "Auto Reboot tiap jam 00:00 dan jam 12:00" | tee -a log-install.txt | lolcat
+echo "Credit to all developers script, VpsProject" | tee -a log-install.txt | lolcat
+echo "THANK YOU FOR CHOICE US!!" | tee -a log-install.txt | lolcat
+echo "" | tee -a log-install.txt | lolcat
+echo " !!! SILAHKAN REBOOT VPS ANDA !!!" | tee -a log-install.txt | lolcat
+echo "=======================================================" | tee -a log-install.txt | lolcat
