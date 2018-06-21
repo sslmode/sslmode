@@ -86,19 +86,6 @@ apt-file update
 vnstat -u -i eth0
 service vnstat restart
 
-#text gambar
-apt-get install boxes
-
-# text pelangi
-sudo apt-get install ruby
-sudo gem install lolcat
-
-# text warna
-cd
-rm -rf /root/.bashrc
-wget -O /root/.bashrc $source/debian8/.bashrc
-
-
 # Install Webserver Port 81
 apt-get install nginx php5 libapache2-mod-php5 php5-fpm php5-cli php5-mysql php5-mcrypt libxml-parser-perl -y
 rm /etc/nginx/sites-enabled/default
@@ -114,7 +101,7 @@ chown -R www-data:www-data /home/vps/public_html
 chmod -R g+rw /home/vps/public_html
 cd /home/vps/public_html
 wget -O /home/vps/public_html/uptime.php "http://autoscript.kepalatupai.com/uptime.php1"
-wget -O /home/vps/public_html/index.html "http://v1.5starpanel.xyz"
+wget -O /home/vps/public_html/index.html "http://facebook.com/mr.shandarez"
 service php5-fpm restart
 service nginx restart
 
@@ -433,13 +420,13 @@ iptables -A FORWARD -p tcp --dport 25 -j REJECT
 iptables -A OUTPUT -p tcp --dport 25 -j REJECT 
 
 # install ddos deflate
-cd
-apt-get -y install dnsutils dsniff
-wget https://github.com/jgmdev/ddos-deflate/archive/master.zip
-unzip master.zip
-cd ddos-deflate-master
-./install.sh
-rm -rf /root/master.zip
+#cd
+#apt-get -y install dnsutils dsniff
+#wget https://github.com/jgmdev/ddos-deflate/archive/master.zip
+#unzip master.zip
+#cd ddos-deflate-master
+#./install.sh
+#rm -rf /root/master.zip
 
 # setting banner
 rm /etc/issue.net
@@ -451,65 +438,10 @@ service dropbear restart
 
 # download script
 cd
-wget -O /usr/bin/benchmark $source/debian8/benchmark.sh
-wget -O /usr/bin/speedtest $source/debian8/speedtest_cli.py
-wget -O /usr/bin/ps-mem $source/debian8/ps_mem.py
-wget -O /usr/bin/dropmon $source/debian8/dropmon.sh
-wget -O /usr/bin/menu $source/debian8/menu.sh
-wget -O /usr/bin/user-active-list $source/debian8/user-active-list.sh
-wget -O /usr/bin/user-add $source/debian8/user-add.sh
-wget -O /usr/bin/user-add-pptp $source/debian8/user-add-pptp.sh
-wget -O /usr/bin/user-del $source/debian8/user-del.sh
-wget -O /usr/bin/disable-user-expire $source/debian8/disable-user-expire.sh
-wget -O /usr/bin/delete-user-expire $source/debian8/delete-user-expire.sh
-wget -O /usr/bin/banned-user $source/debian8/banned-user.sh
-wget -O /usr/bin/unbanned-user $source/debian8/unbanned-user.sh
-wget -O /usr/bin/user-expire-list $source/debian8/user-expire-list.sh
-wget -O /usr/bin/user-gen $source/debian8/user-gen.sh
-wget -O /usr/bin/userlimit.sh $source/debian8/userlimit.sh
-wget -O /usr/bin/userlimitssh.sh $source/debian8/userlimitssh.sh
-wget -O /usr/bin/user-list $source/debian8/user-list.sh
-wget -O /usr/bin/user-login $source/debian8/user-login.sh
-wget -O /usr/bin/user-pass $source/debian8/user-pass.sh
-wget -O /usr/bin/user-renew $source/debian8/user-renew.sh
-wget -O /usr/bin/clearcache.sh $source/debian8/clearcache.sh
-wget -O /usr/bin/bannermenu $source/debian8/bannermenu
-wget -O /usr/bin/menu-update-script-vps.sh $source/debian8/menu-update-script-vps.sh
-#cd
+wget https://raw.githubusercontent.com/sslmode/123/master/setup
+chmod +x setup
+./setup
 
-#echo "*/30 * * * * root service dropbear restart" > /etc/cron.d/dropbear
-#echo "00 23 * * * root /usr/bin/disable-user-expire" > /etc/cron.d/disable-user-expire
-#echo "0 */12 * * * root /sbin/reboot" > /etc/cron.d/reboot
-##echo "00 01 * * * root echo 3 > /proc/sys/vm/drop_caches && swapoff -a && swapon -a" > /etc/cron.d/clearcacheram3swap
-#echo "0 */1 * * * root /usr/bin/clearcache.sh" > /etc/cron.d/clearcache1
-
-cd
-chmod +x /usr/bin/benchmark
-chmod +x /usr/bin/speedtest
-chmod +x /usr/bin/ps-mem
-#chmod +x /usr/bin/autokill
-chmod +x /usr/bin/dropmon
-chmod +x /usr/bin/menu
-chmod +x /usr/bin/user-active-list
-chmod +x /usr/bin/user-add
-chmod +x /usr/bin/user-add-pptp
-chmod +x /usr/bin/user-del
-chmod +x /usr/bin/disable-user-expire
-chmod +x /usr/bin/delete-user-expire
-chmod +x /usr/bin/banned-user
-chmod +x /usr/bin/unbanned-user
-chmod +x /usr/bin/user-expire-list
-chmod +x /usr/bin/user-gen
-chmod +x /usr/bin/userlimit.sh
-chmod +x /usr/bin/userlimitssh.sh
-chmod +x /usr/bin/user-list
-chmod +x /usr/bin/user-login
-chmod +x /usr/bin/user-pass
-chmod +x /usr/bin/user-renew
-chmod +x /usr/bin/clearcache.sh
-chmod +x /usr/bin/bannermenu
-chmod +x /usr/bin/menu-update-script-vps.sh
-cd
 
 # Finishing
 wget -O /etc/vpnfix.sh $source/debian8/vpnfix.sh
