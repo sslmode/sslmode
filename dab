@@ -419,14 +419,13 @@ iptables -A INPUT -p tcp --dport 25 -j REJECT
 iptables -A FORWARD -p tcp --dport 25 -j REJECT 
 iptables -A OUTPUT -p tcp --dport 25 -j REJECT 
 
-# install ddos deflate
-#cd
-#apt-get -y install dnsutils dsniff
-#wget https://github.com/jgmdev/ddos-deflate/archive/master.zip
-#unzip master.zip
-#cd ddos-deflate-master
-#./install.sh
-#rm -rf /root/master.zip
+# Install Dos Deflate
+apt-get -y install dnsutils dsniff
+wget http://raw.github.com/MuLuu09/autoscript/master/ddos-deflate-master.zip
+unzip master.zip
+cd ddos-deflate-master
+./install.sh
+cd
 
 # setting banner
 rm /etc/issue.net
