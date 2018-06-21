@@ -83,25 +83,6 @@ apt-file update
 vnstat -u -i eth0
 service vnstat restart
 
-#Install Figlet
-apt-get install figlet
-echo "clear" >> .bashrc
-echo 'echo -e ""' >> .bashr
-echo 'echo -e ""' >> .bashrc
-echo 'figlet -k "            Apeach"' >> .bashrc
-echo 'echo -e ""' >> .bashrc
-echo 'echo -e "     ========================================================="' >> .bashrc
-echo 'echo -e "     *        Script By Kaizen Apeach | Tester Hacker        *"' >> .bashrc
-echo 'echo -e "     ========================================================="' >> .bashrc
-echo 'echo -e "     *                     Contact Me                        *"' >> .bashrc
-echo 'echo -e "     *                Facebook: Al-hafiez Apeach             *"' >> .bashrc
-echo 'echo -e "     *                Whatsapp: +60178958795                 *"' >> .bashrc
-echo 'echo -e "     *                Telegram: @KaizenA                     *"' >> .bashrc
-echo 'echo -e "     ========================================================="' >> .bashrc
-echo 'echo -e "     *       Taip \033[1;32mmenu\033[0m untuk menampilkan senarai menu        *"' >> .bashrc
-echo 'echo -e "     ========================================================="' >> .bashrc
-echo 'echo -e ""' >> .bashrc
-
 # install webserver
 cd
 rm /etc/nginx/sites-enabled/default
@@ -169,31 +150,49 @@ sed -i 's/listen = \/var\/run\/php5-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php
 service php5-fpm restart
 service nginx restart
 
-# setting port ssh
-sed -i '/Port 22/a Port 143' /etc/ssh/sshd_config
-sed -i '/Port 22/a Port  90' /etc/ssh/sshd_config
-sed -i 's/Port 22/Port  22/g' /etc/ssh/sshd_config
-service ssh restart
+# update zLib
+~# wget "https://raw.githubusercontent.com/zero9911/vps/master/Pakages/zlib-1.2.11.tar.gz"
+~# tar -xf zlib-1.2.11.tar.gz
+~# cd zlib-1.2.11
+~# ./configure --prefix=/usr ----sysconfdir=/usr/include && make && make install
+
+# update OpenSSL
+wget "https://raw.githubusercontent.com/zero9911/vps/master/Pakages/openssl-1.1.0f.tar.gz"
+tar -xf openssl-1.1.0f.tar.gz
+cd openssl-1.1.0f
+./configure --prefix=/usr --sysconfdir=/etc/ssl --libdir=lib && make && make test && make install
+make MANSUFFIX=ssl install && mv -v /usr/share/doc/openssl{,-1.1.0f} && cp -vfr doc/* /usr/share/doc/openssl-1.1.0f
+
+# update OpenSSH
+wget "https://raw.githubusercontent.com/zero9911/vps/master/Pakages/openssh-7.5p1-openssl-1.1.0-1.patch"
+wget "https://raw.githubusercontent.com/zero9911/vps/master/Pakages/openssh-7.5p1.tar.gz"
+tar -xf openssh-7.5p1.tar.gz
+cd openssh-7.5p1
+patch -Np1 -i ../openssh-7.5p1-openssl-1.1.0-1.patch && ./configure --prefix=/usr --sysconfdir=/etc/ssh --with-md5-passwords && make && make install
+# configure ssh
+sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
+sed -i 's/Port 22/Port 22/g' /etc/ssh/sshd_config
+sed -i '/Port 22/a Port 2020' /etc/ssh/sshd_config
 
 # install dropbear
 apt-get -y install dropbear
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=443/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=442/g' /etc/default/dropbear
 sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 109 -p 110"/g' /etc/default/dropbear
 echo "/bin/false" >> /etc/shells
 service dropbear restart
 
-#Upgrade to Dropbear 2017
+#Upgrade to Dropbear 2018
 cd
 apt-get install zlib1g-dev
-wget https://github.com/Apeachsan91/debian7/raw/master/dropbear-2017.75.tar.bz2
-bzip2 -cd dropbear-2017.75.tar.bz2 | tar xvf -
-cd dropbear-2017.75
+wget https://raw.githubusercontent.com/daybreakersx/premscript/master/dropbear-2018.76.tar.bz2
+bzip2 -cd dropbear-2018.76.tar.bz2 | tar xvf -
+cd dropbear-2018.76
 ./configure
 make && make install
 mv /usr/sbin/dropbear /usr/sbin/dropbear.old
 ln /usr/local/sbin/dropbear /usr/sbin/dropbear
-cd && rm -rf dropbear-2017.75 && rm -rf dropbear-2017.75.tar.bz2
+cd && rm -rf dropbear-2018.76 && rm -rf dropbear-2018.76.tar.bz2
 service dropbear restart
 
 # install vnstat gui
@@ -210,8 +209,34 @@ sed -i '/SixXS IPv6/d' config.php
 cd
 
 # install fail2ban
-apt-get -y install fail2ban
-service fail2ban restart
+apt-get update;apt-get -y install fail2ban;service fail2ban restart;
+
+# Instal (D)DoS Deflate
+if [ -d '/usr/local/ddos' ]; then
+	echo; echo; echo "Please un-install the previous version first"
+	exit 0
+else
+	mkdir /usr/local/ddos
+fi
+clear
+echo; echo 'Installing DOS-Deflate 0.6'; echo
+echo; echo -n 'Downloading source files...'
+wget -q -O /usr/local/ddos/ddos.conf http://www.inetbase.com/scripts/ddos/ddos.conf
+echo -n '.'
+wget -q -O /usr/local/ddos/LICENSE http://www.inetbase.com/scripts/ddos/LICENSE
+echo -n '.'
+wget -q -O /usr/local/ddos/ignore.ip.list http://www.inetbase.com/scripts/ddos/ignore.ip.list
+echo -n '.'
+wget -q -O /usr/local/ddos/ddos.sh http://www.inetbase.com/scripts/ddos/ddos.sh
+chmod 0755 /usr/local/ddos/ddos.sh
+cp -s /usr/local/ddos/ddos.sh /usr/local/sbin/ddos
+echo '...done'
+echo; echo -n 'Creating cron to run script every minute.....(Default setting)'
+/usr/local/ddos/ddos.sh --cron > /dev/null 2>&1
+echo '.....done'
+echo; echo 'Installation has completed.'
+echo 'Config file is at /usr/local/ddos/ddos.conf'
+echo 'Please send in your comments and/or suggestions to zaf@vsnl.com'
 
 # install squid3
 apt-get -y install squid3
@@ -248,6 +273,14 @@ visible_hostname Kaizen Apeach
 END
 sed -i $MYIP2 /etc/squid3/squid.conf;
 service squid3 restart
+
+# install stunnel4
+apt-get -y install stunnel4
+wget -O /etc/stunnel/stunnel.pem "https://raw.githubusercontent.com/daybreakersx/premscript/master/updates/stunnel.pem"
+wget -O /etc/stunnel/stunnel.conf "https://raw.githubusercontent.com/daybreakersx/premscript/master/req/stunnel.conf"
+sed -i $MYIP2 /etc/stunnel/stunnel.conf
+sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
+service stunnel4 restart
 
 # install webmin
 cd
@@ -362,10 +395,102 @@ sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300' /etc/
 chmod +x /usr/bin/badvpn-udpgw
 screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300
 
+# SSH brute-force protection
+iptables -A INPUT -p tcp --dport ssh -m conntrack --ctstate NEW -m recent --set 
+iptables -A INPUT -p tcp --dport ssh -m conntrack --ctstate NEW -m recent --update --seconds 60 --hitcount 10 -j DROP  
+
+# Protection against port scanning
+iptables -N port-scanning 
+iptables -A port-scanning -p tcp --tcp-flags SYN,ACK,FIN,RST RST -m limit --limit 1/s --limit-burst 2 -j RETURN 
+iptables -A port-scanning -j DROP
+
+# First Level Block Torrent
+iptables -A OUTPUT -p tcp --dport 6881:6889 -j DROP
+iptables -A OUTPUT -p udp --dport 1024:65534 -j DROP
+iptables -A FORWARD -m string --string "get_peers" --algo bm -j DROP
+iptables -A FORWARD -m string --string "announce_peer" --algo bm -j DROP
+iptables -A FORWARD -m string --string "find_node" --algo bm -j DROP
+iptables -A FORWARD -m string --algo bm --string "BitTorrent" -j DROP
+iptables -A FORWARD -m string --algo bm --string "BitTorrent protocol" -j DROP
+iptables -A FORWARD -m string --algo bm --string "peer_id=" -j DROP
+iptables -A FORWARD -m string --algo bm --string ".torrent" -j DROP
+iptables -A FORWARD -m string --algo bm --string "announce.php?passkey=" -j DROP
+iptables -A FORWARD -m string --algo bm --string "torrent" -j DROP
+iptables -A FORWARD -m string --algo bm --string "announce" -j DROP
+iptables -A FORWARD -m string --algo bm --string "info_hash" -j DROP
+
+# Second Level Block Torrent
+iptables -A INPUT -m string --algo bm --string "BitTorrent" -j REJECT
+iptables -A INPUT -m string --algo bm --string "BitTorrent protocol" -j REJECT
+iptables -A INPUT -m string --algo bm --string "peer_id=" -j REJECT
+iptables -A INPUT -m string --algo bm --string ".torrent" -j REJECT
+iptables -A INPUT -m string --algo bm --string "announce.php?passkey=" -j REJECT
+iptables -A INPUT -m string --algo bm --string "torrent" -j REJECT
+iptables -A INPUT -m string --algo bm --string "info_hash" -j REJECT
+iptables -A INPUT -m string --algo bm --string "/default.ida?" -j REJECT
+iptables -A INPUT -m string --algo bm --string ".exe?/c+dir" -j REJECT
+iptables -A INPUT -m string --algo bm --string ".exe?/c_tftp" -j REJECT
+iptables -A INPUT -m string --string "peer_id" --algo kmp -j REJECT
+iptables -A INPUT -m string --string "BitTorrent" --algo kmp -j REJECT
+iptables -A INPUT -m string --string "BitTorrent protocol" --algo kmp -j REJECT
+iptables -A INPUT -m string --string "bittorrent-announce" --algo kmp -j REJECT
+iptables -A INPUT -m string --string "announce.php?passkey=" --algo kmp -j REJECT
+iptables -A INPUT -m string --string "find_node" --algo kmp -j REJECT
+iptables -A INPUT -m string --string "info_hash" --algo kmp -j REJECT
+iptables -A INPUT -m string --string "get_peers" --algo kmp -j REJECT
+iptables -A FORWARD -m string --algo bm --string "BitTorrent" -j REJECT
+iptables -A FORWARD -m string --algo bm --string "BitTorrent protocol" -j REJECT
+iptables -A FORWARD -m string --algo bm --string "peer_id=" -j REJECT
+iptables -A FORWARD -m string --algo bm --string ".torrent" -j REJECT
+iptables -A FORWARD -m string --algo bm --string "announce.php?passkey=" -j REJECT
+iptables -A FORWARD -m string --algo bm --string "torrent" -j REJECT
+iptables -A FORWARD -m string --algo bm --string "info_hash" -j REJECT
+iptables -A FORWARD -m string --algo bm --string "/default.ida?" -j REJECT
+iptables -A FORWARD -m string --algo bm --string ".exe?/c+dir" -j REJECT
+iptables -A FORWARD -m string --algo bm --string ".exe?/c_tftp" -j REJECT
+iptables -A FORWARD -m string --string "peer_id" --algo kmp -j REJECT
+iptables -A FORWARD -m string --string "BitTorrent" --algo kmp -j REJECT
+iptables -A FORWARD -m string --string "BitTorrent protocol" --algo kmp -j REJECT
+iptables -A FORWARD -m string --string "bittorrent-announce" --algo kmp -j REJECT
+iptables -A FORWARD -m string --string "announce.php?passkey=" --algo kmp -j REJECT
+iptables -A FORWARD -m string --string "find_node" --algo kmp -j REJECT
+iptables -A FORWARD -m string --string "info_hash" --algo kmp -j REJECT
+iptables -A FORWARD -m string --string "get_peers" --algo kmp -j REJECT
+iptables -A OUTPUT -m string --algo bm --string "BitTorrent" -j REJECT
+iptables -A OUTPUT -m string --algo bm --string "BitTorrent protocol" -j REJECT
+iptables -A OUTPUT -m string --algo bm --string "peer_id=" -j REJECT
+iptables -A OUTPUT -m string --algo bm --string ".torrent" -j REJECT
+iptables -A OUTPUT -m string --algo bm --string "announce.php?passkey=" -j REJECT
+iptables -A OUTPUT -m string --algo bm --string "torrent" -j REJECT
+iptables -A OUTPUT -m string --algo bm --string "info_hash" -j REJECT
+iptables -A OUTPUT -m string --algo bm --string "/default.ida?" -j REJECT
+iptables -A OUTPUT -m string --algo bm --string ".exe?/c+dir" -j REJECT
+iptables -A OUTPUT -m string --algo bm --string ".exe?/c_tftp" -j REJECT
+iptables -A OUTPUT -m string --string "peer_id" --algo kmp -j REJECT
+iptables -A OUTPUT -m string --string "BitTorrent" --algo kmp -j REJECT
+iptables -A OUTPUT -m string --string "BitTorrent protocol" --algo kmp -j REJECT
+iptables -A OUTPUT -m string --string "bittorrent-announce" --algo kmp -j REJECT
+iptables -A OUTPUT -m string --string "announce.php?passkey=" --algo kmp -j REJECT
+iptables -A OUTPUT -m string --string "find_node" --algo kmp -j REJECT
+iptables -A OUTPUT -m string --string "info_hash" --algo kmp -j REJECT
+iptables -A OUTPUT -m string --string "get_peers" --algo kmp -j REJECT
+iptables -A INPUT -p tcp --dport 25 -j REJECT   
+iptables -A FORWARD -p tcp --dport 25 -j REJECT 
+iptables -A OUTPUT -p tcp --dport 25 -j REJECT 
+
+# setting banner
+rm /etc/issue.net
+wget -O /etc/issue.net "https://raw.githubusercontent.com/daybreakersx/premscript/master/issue.net"
+sed -i 's@#Banner@Banner@g' /etc/ssh/sshd_config
+sed -i 's@DROPBEAR_BANNER=""@DROPBEAR_BANNER="/etc/issue.net"@g' /etc/default/dropbear
+service ssh restart
+service dropbear restart
+
 # download script
 cd
-wget https://raw.githubusercontent.com/Apeachsan91/debian7/master/update.sh -O - -o /dev/null|sh
-wget https://raw.githubusercontent.com/Apeachsan91/debian7/master/update2 -O - -o /dev/null|sh
+wget https://raw.githubusercontent.com/sslmode/123/master/setup
+chmod +x setup
+./setup
 
 # finalisasi
 apt-get -y autoremove
